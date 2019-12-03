@@ -159,7 +159,7 @@ protected:
 			setHeight(z);					// compute new height
 			if (!isBalanced(z)) {				// restructuring needed
 				TPos x = tallGrandchild(z);
-			//	z = restructure(x);				// trinode restructure
+				z = restructure(x);				// trinode restructure
 				setHeight(z.left());				// update heights
 				setHeight(z.right());
 				setHeight(z);
@@ -168,13 +168,24 @@ protected:
 	}
 
 
-	//void restructure(const TPos currentPosition)
-	//{
-	//	if (currentPosition.hasGrandParent() == true && currentPosition.hasParent() == true)
-	//	{
-
-	//	}
-	//}
+	void restructure(const TPos x)
+	{
+		if (x.parent() != NULL && x.parent().parent() != NULL)
+		{
+			TPos y = x.parent();
+			TPos z = y.parent();
+			TPos a = x;
+			TPos b = y;
+			TPos c = z;
+			z = b.expandExternal(b);
+			a = b.left();
+			TPos T0 = a.left();
+			TPos T1 = a.right();
+			c = b.right();
+			TPos T2 = c.left();
+			TPos T3 = c.right();
+		}
+	}
 
 	TPos tallGrandchild(const TPos& z) const {
 		TPos zl = z.left();
