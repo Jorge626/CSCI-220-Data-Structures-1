@@ -39,10 +39,6 @@ public:
 
 		bool isInternal() const { return !isExternal(); }
 
-		bool hasParent() {	return position->parent != NULL; }
-
-		bool hasGrandParent()	{	return position->parent->parent() != NULL; }
-
 		bool operator==(const Position& comparedPosition) const { return position == comparedPosition.position; }
 
 		bool operator != (const Position comparedPosition) const { return !(*this == comparedPosition); }
