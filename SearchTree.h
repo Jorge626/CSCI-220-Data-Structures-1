@@ -165,7 +165,7 @@ protected:
 		}
 	}
 
-	void restructure(const TPos x)
+	TPos restructure(const TPos x)
 	{
 		if (x.parent() != NULL && x.parent().parent() != NULL)
 		{
@@ -174,7 +174,6 @@ protected:
 			TPos a = x;
 			TPos b = y;
 			TPos c = z;
-			z = b.expandExternal(b);
 			a = b.left();
 			TPos T0 = a.left();
 			TPos T1 = a.right();
@@ -182,6 +181,7 @@ protected:
 			TPos T2 = c.left();
 			TPos T3 = c.right();
 		}
+		return x;
 	}
 
 	TPos tallGrandchild(const TPos& z) const {
