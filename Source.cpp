@@ -5,7 +5,7 @@ int menu();
 int main()
 {
 	int choice;
-	std::string fileName = "C:\\Users\\jorge\\Desktop\\p4small.txt";
+	std::string fileName = "C:\\Users\\username\\Desktop\\p4small.txt";
 	AVLTree tree(fileName);
 
 	do {
