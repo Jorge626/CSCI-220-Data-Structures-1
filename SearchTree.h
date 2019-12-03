@@ -72,9 +72,7 @@ public:
 	{
 		return Iterator(binaryTree.root());
 	}
-	
-
-	
+		
 protected:
 	typedef BinaryTree<BinaryTreeElement> linkedBinaryTree;
 	typedef typename linkedBinaryTree::Position TPos;
@@ -166,7 +164,6 @@ protected:
 			}
 		}
 	}
-
 
 	void restructure(const TPos x)
 	{
