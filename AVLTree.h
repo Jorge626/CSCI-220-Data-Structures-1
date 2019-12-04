@@ -33,7 +33,7 @@ public:
 				std::stringstream ss(line);
 				std::getline(ss, countyCode, ',');
 				std::getline(ss, countyPopulation, ',');
-				std::getline(ss, countyName, ',');
+				std::getline(ss, countyName, '\t');
 				insertRecord(countyCode, countyPopulation, countyName);
 			}
 		}
@@ -60,7 +60,7 @@ public:
 	void listAllRecords()
 	{
 		Iterator tempIterator = Tree.begin();
-		for (tempIterator; tempIterator != Tree.end(); ++iterator)
+		for (tempIterator; tempIterator != Tree.end(); ++tempIterator)
 		{
 			std::cout << (*tempIterator).countyCode() << " " << (*tempIterator).countyName() << " " << (*tempIterator).countyPopulation() << "\n";
 		}
@@ -68,9 +68,11 @@ public:
 
 	void printRecord(Iterator record)
 	{
-		std::cout << "The record is: " << (*record).countyCode() << " " << (*record).countyName() << " " << (*record).countyPopulation() << "\n";
+		if ((*record).countyCode() == "")
+			std::cout << "Error: No information found\n";
+		else
+			std::cout << "The record is:\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nCounty Code: " << (*record).countyCode() << "\nCounty Population: " << (*record).countyName() << "\nCounty Name: " << (*record).countyPopulation() << "\n";
 	}
-
 
 protected:
 	ST Tree;
