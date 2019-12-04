@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable )
 #ifndef BST_H
 #define BST_H
 
@@ -8,16 +9,16 @@
 template <typename BinaryTreeElement>
 class SearchTree
 {
-public: 
+public:
 	typedef typename BinaryTreeElement::CountyCode C;
 	typedef typename BinaryTreeElement::CountyPopulation P;
 	typedef typename BinaryTreeElement::CountyName N;
 
 	class Iterator;
 
-	SearchTree() : binaryTree(), totalEntries(0) 
+	SearchTree() : binaryTree(), totalEntries(0)
 	{
-		binaryTree.addRoot(); 
+		binaryTree.addRoot();
 		binaryTree.expandExternal(binaryTree.root());
 	};
 
@@ -46,7 +47,7 @@ public:
 		return Iterator(tempInsert);
 	}
 
-	void erase(const C& c) //throw(NonexistentElement) 
+	void erase(const C& c) throw(NonexistentElement)
 	{
 		TPos v = finder(c, root());			// find in base tree
 		if (Iterator(v) == end())			// not found?
@@ -72,7 +73,7 @@ public:
 	{
 		return Iterator(binaryTree.root());
 	}
-		
+
 protected:
 	typedef BinaryTree<BinaryTreeElement> linkedBinaryTree;
 	typedef typename linkedBinaryTree::Position TPos;
@@ -165,25 +166,6 @@ protected:
 		}
 	}
 
-	TPos restructure(const TPos x)
-	{
-		if (x.parent() != NULL && x.parent().parent() != NULL)
-		{
-			TPos y = x.parent();
-			TPos z = y.parent();
-			TPos a = x;
-			TPos b = y;
-			TPos c = z;
-			a = b.left();
-			TPos T0 = a.left();
-			TPos T1 = a.right();
-			c = b.right();
-			TPos T2 = c.left();
-			TPos T3 = c.right();
-		}
-		return x;
-	}
-
 	TPos tallGrandchild(const TPos& z) const {
 		TPos zl = z.left();
 		TPos zr = z.right();
@@ -197,6 +179,76 @@ protected:
 				return zr.right();
 			else
 				return zr.left();
+	}
+
+	TPos restructure(const TPos x)
+	{
+		TPos y = x.parent();
+		TPos z = y.parent();
+		TPos a, b, c, T0, T1, T2, T3;
+
+		if (z.left() == y && y.left() == x)
+		{
+			a = x;
+			b = y;
+			c = z;
+			T0 = a.left();
+			T1 = a.right();
+			T2 = b.right();
+			T3 = c.right();
+		}
+
+		else if (z.right() == y && y.right() == x)
+		{
+			a = z;
+			b = y;
+			c = x;
+			T0 = a.left();
+			T1 = b.left();
+			T2 = c.left();
+			T3 = c.right();
+		}
+
+		else if (z.left() == y && y.right() == x)
+		{
+			a = x;
+			b = y;
+			c = z;
+			T0 = a.left();
+			T1 = b.left();
+			T2 = b.right();
+			T3 = c.right();
+		}
+
+		else if (z.right() == y && y.left() == x)
+		{
+			a = x;
+			b = y;
+			c = z;
+			T0 = z.left();
+			T1 = b.left();
+			T2 = b.right();
+			T3 = c.right();
+		}
+
+		if (z.isRoot())
+			b = root();
+
+		b.left() = a;
+		b.right() = c;
+		a.parent() = b;
+		c.parent() = b;
+		a.left() = T0;
+		a.right() = T1;
+		T0.parent() = a;
+		T1.parent() = a;
+		c.left() = T2;
+		c.right() = T3;
+
+		if (z.isRoot())
+			b = root();
+
+		return b;
 	}
 
 private:
@@ -221,7 +273,7 @@ public:
 		{
 			return position == comparedPosition.position;
 		}
-		
+
 		bool operator!=(const Iterator& comparedPosition) const
 		{
 			return !(*this == comparedPosition);
@@ -232,8 +284,8 @@ public:
 			TPos tempPosition = position.right();
 			if (tempPosition.isInternal())
 			{
-				do 
-				{ 
+				do
+				{
 					position = tempPosition;
 					tempPosition = tempPosition.left();
 				} while (tempPosition.isInternal());
