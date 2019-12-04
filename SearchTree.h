@@ -245,9 +245,6 @@ protected:
 		c.left() = T2;
 		c.right() = T3;
 
-		if (z.isRoot())
-			b = root();
-
 		return b;
 	}
 
