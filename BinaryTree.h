@@ -22,7 +22,7 @@ public:
 	private:
 		Node* position;
 		int ht;
-	public: 
+	public:
 		Position(Node* _pos = NULL) : position(_pos) { }
 
 		Elem& operator*() { return position->element; }
@@ -43,9 +43,9 @@ public:
 
 		bool operator != (const Position comparedPosition) const { return !(*this == comparedPosition); }
 
-		int height() const	{	return ht;	}			// get height
+		int height() const { return ht; }			// get height
 
-		void setHeight(int h)	{	ht = h;	}			// set height
+		void setHeight(int h) { ht = h; }			// set height
 
 		friend class BinaryTree;
 
@@ -88,7 +88,7 @@ public:
 		expandedNode->right->parent = expandedNode;
 		totalNodes += 2;
 	}
-	
+
 	Position removeAboveExternal(const Position& currentPosition)
 	{
 		Node* currentNode = currentPosition.position;
@@ -123,18 +123,6 @@ protected:
 			preOrder(currentNode->left, positionList);
 		if (currentNode->right != NULL)
 			preOrder(currentNode->right, positionList);
-	}
-
-	void inOrder(Node* currentNode, PositionList& positionList) const
-	{
-		positionList.push_back(Position(currentNode));
-		if (currentNode != NULL)
-		{
-			if (currentNode->left != NULL)
-				inOrder(currentNode->left, positionList);
-			if (currentNode->right != NULL)
-				inOrder(currentNode->right, positionList);
-		}
 	}
 
 private:
