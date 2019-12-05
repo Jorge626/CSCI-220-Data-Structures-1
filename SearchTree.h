@@ -218,8 +218,8 @@ protected:
 			b = x;
 			c = z;
 			T0 = a.left();
-			T1 = b.left();
-			T2 = b.right();
+			T1 = a.right();
+			T2 = c.left();
 			T3 = c.right();
 		}
 
@@ -229,8 +229,8 @@ protected:
 			b = x;
 			c = y;
 			T0 = a.left();
-			T1 = b.left();
-			T2 = b.right();
+			T1 = a.right();
+			T2 = c.left();
 			T3 = c.right();
 		}
 
