@@ -214,8 +214,8 @@ protected:
 
 		else if (z.left() == y && y.right() == x)
 		{
-			a = x;
-			b = y;
+			a = y;
+			b = x;
 			c = z;
 			T0 = a.left();
 			T1 = b.left();
@@ -225,10 +225,10 @@ protected:
 
 		else if (z.right() == y && y.left() == x)
 		{
-			a = x;
-			b = y;
-			c = z;
-			T0 = z.left();
+			a = z;
+			b = x;
+			c = y;
+			T0 = a.left();
 			T1 = b.left();
 			T2 = b.right();
 			T3 = c.right();
