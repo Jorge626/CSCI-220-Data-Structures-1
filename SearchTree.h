@@ -185,7 +185,7 @@ protected:
 	{
 		if (x.isExternal())
 			binaryTree.expandExternal(x);
-		
+
 		TPos y = x.parent();
 		TPos z = y.parent();
 		TPos a, b, c, T0, T1, T2, T3;
