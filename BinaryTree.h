@@ -14,14 +14,14 @@ protected:
 		Node* parent;
 		Node* left;
 		Node* right;
-		Node() : element(), parent(NULL), left(NULL), right(NULL) { }
+		int ht;
+		Node() : element(), parent(NULL), left(NULL), right(NULL), ht(0) { }
 	};
 
 public:
 	class Position {
 	private:
 		Node* position;
-		int ht;
 	public:
 		Position(Node* _pos = NULL) : position(_pos) { }
 
@@ -43,11 +43,11 @@ public:
 
 		bool operator != (const Position comparedPosition) const { return !(*this == comparedPosition); }
 
-		int height() const { return ht; }			// get height
+		int height() const { return position->ht; }			// get height
 
-		void setHeight(int h) { ht = h; }			// set height
+		void setHeight(int h) { position->ht = h; }			// set height
 
-		friend class BinaryTree;
+		friend class BinaryTree<Elem>;
 
 	};
 	typedef std::list<Position> PositionList;
