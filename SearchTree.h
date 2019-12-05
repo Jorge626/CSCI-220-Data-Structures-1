@@ -247,6 +247,8 @@ protected:
 		T1.parent() = a;
 		c.left() = T2;
 		c.right() = T3;
+		T2.parent() = c;
+		T3.parent() = c;
 
 		return b;
 	}
