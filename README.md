@@ -7,3 +7,8 @@ There are 3 Projects in this repository.
 - One project utilizes an AVL Tree data structure to keep track of a country code, population, and the name of the county. Users are able to search for records, insert records, delete records, and list the records.
 - Another project utilizes a Stack data structure to create a calcultor that stores an expression in postfix notation and solves the expression.
 - The last project utilizes a Node List data structure to create a text editor.
+
+## Things I learned in this course
+- Abstract data types and running time analysis tools. 
+- Linear data structures including sets, stacks, queues, and linked lists. 
+- Trees, binary search trees, heaps, and priority queues.
